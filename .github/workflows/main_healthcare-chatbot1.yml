@@ -10,7 +10,7 @@ on:
       - main
     paths:
       - 'backend/**'        # ✅ Only trigger when backend folder changes
-      - '.github/workflows/backend-deploy.yml'
+      - '.github/workflows/main_healthcare-chatbot1.yml'
   workflow_dispatch:
 
 jobs:
