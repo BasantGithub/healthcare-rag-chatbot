@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "question": "Is Dr. Sharma available today?",
+    "answer": "Dr. Sharma is available from 10 AM to 2 PM on weekdays."
+  },
+  {
+    "id": "2",
+    "question": "What treatments are available?",
+    "answer": "We provide general medicine, pediatrics, physiotherapy, dental care, and diabetes management."
+  },
+  {
+    "id": "3",
+    "question": "Do you offer emergency services?",
+    "answer": "Yes, our emergency department operates 24/7 with on-call doctors."
+  },
+  {
+    "id": "4",
+    "question": "Can I book an appointment online?",
+    "answer": "Appointments can be booked by phone or at the reception desk. Online booking will be available soon."
+  },
+  {
+    "id": "5",
+    "question": "Do you provide vaccination services?",
+    "answer": "Yes, we provide routine immunizations for children and seasonal flu vaccines."
+  },
+  {
+    "id": "6",
+    "question": "Is there a cardiology specialist?",
+    "answer": "Yes, Dr. Mehta is our cardiology specialist available on Mondays and Thursdays."
+  }
+]

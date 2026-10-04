@@ -1,0 +1,9 @@
+flask
+flask-cors
+python-dotenv
+openai
+azure-search-documents
+azure-core
+requests
+opencensus-ext-azure 
+opencensus-ext-flask
