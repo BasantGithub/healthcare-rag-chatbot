@@ -34,7 +34,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           ###### Repository/Build Configurations ######
-          app_location: "frontend"       # ✅ React source lives here
+          app_location: "./frontend"       # ✅ React source lives here
           api_location: ""               # No backend in Static Web App
           output_location: "build"       # ✅ React build output folder
           ###### End of Repository/Build Configurations ######
