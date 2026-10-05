@@ -11,34 +11,36 @@ function ChatBox({ messages }) {
 
   return (
     <div className="chat-box">
-      {messages.map((msg, index) => (
-        <Card
-          key={index}
-          style={{
-            marginBottom: "10px",
-            maxWidth: "70%",
-            alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
-            backgroundColor: msg.sender === "user" ? "#DCF8C6" : "#FFF",
-          }}
-        >
-          <CardContent style={{ display: "flex", alignItems: "center" }}>
-            <Avatar style={{ marginRight: "10px" }}>
-              {msg.sender === "user" ? "U" : "AI"}
-            </Avatar>
-            <div>
-              <Typography variant="body1">{msg.text}</Typography>
-              <Typography
-                variant="caption"
-                color="textSecondary"
-                style={{ fontSize: "0.7rem" }}
-              >
-                {msg.timestamp}
-              </Typography>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-      <div ref={chatEndRef} />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {messages.map((msg, index) => (
+          <Card
+            key={index}
+            style={{
+              marginBottom: "10px",
+              maxWidth: "70%",
+              alignSelf: msg.sender === "user" ? "flex-end" : "flex-start",
+              backgroundColor: msg.sender === "user" ? "#DCF8C6" : "#FFF",
+            }}
+          >
+            <CardContent style={{ display: "flex", alignItems: "center" }}>
+              <Avatar style={{ marginRight: "10px" }}>
+                {msg.sender === "user" ? "U" : "AI"}
+              </Avatar>
+              <div>
+                <Typography variant="body1">{msg.text}</Typography>
+                <Typography
+                  variant="caption"
+                  color="textSecondary"
+                  style={{ fontSize: "0.7rem" }}
+                >
+                  {msg.timestamp}
+                </Typography>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+        <div ref={chatEndRef} /> {/* Invisible anchor for auto-scroll */}
+      </div>
     </div>
   );
 }
