@@ -1,3 +1,5 @@
+# GitHub Actions workflow for building and deploying React frontend to Azure Static Web Apps
+
 name: Azure Static Web Apps CI/CD
 
 on:
@@ -5,45 +7,64 @@ on:
     branches:
       - main
     paths:
-      - 'frontend/**'        # ✅ Only trigger when frontend folder changes
+      - 'frontend/**'   # 🔹 Trigger only when files inside the frontend folder change
       - '.github/workflows/azure-static-web-apps-wonderful-rock-0dcced900.yml'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
     paths:
-      - 'frontend/**'
+      - 'frontend/**'   # 🔹 Same restriction for pull requests
       - '.github/workflows/azure-static-web-apps-wonderful-rock-0dcced900.yml'
 
 jobs:
   build_and_deploy_job:
+    # 🔹 Run this job only for pushes or active pull requests (not closed ones)
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest   # 🔹 Use the latest Ubuntu runner
     name: Build and Deploy Job
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
 
-      - name: Build And Deploy
-        id: builddeploy
+    steps:
+      # Step 1: Checkout repository code
+      - uses: actions/checkout@v3
+        # 🔹 Ensures the workflow has access to your repo files
+
+      # Step 2: Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'   # 🔹 Use Node.js v18 (stable for React apps)
+
+      # Step 3: Install frontend dependencies
+      - name: Install dependencies
+        run: npm install
+        working-directory: frontend
+        # 🔹 Runs npm install inside the frontend folder to fetch React dependencies
+
+      # Step 4: Build React app
+      - name: Build React app
+        run: npm run build
+        working-directory: frontend
+        # 🔹 Compiles React into static files inside frontend/build
+
+      # Step 5: Deploy build output to Azure Static Web Apps
+      - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WONDERFUL_ROCK_0DCCED900 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}   # 🔹 Required for GitHub integration (PR comments, etc.)
           action: "upload"
-          ###### Repository/Build Configurations ######
-          app_location: "./frontend"       # ✅ React source lives here
-          api_location: ""               # No backend in Static Web App
-          output_location: "build"       # ✅ React build output folder
-          ###### End of Repository/Build Configurations ######
+          app_location: "./frontend"   # 🔹 Path to React source code
+          output_location: "build"   # 🔹 Path to compiled React build folder
 
   close_pull_request_job:
+    # 🔹 Run this job only when a pull request is closed
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
+
     steps:
+      # Step 6: Clean up PR environment in Azure SWA
       - name: Close Pull Request
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
