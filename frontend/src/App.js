@@ -22,7 +22,7 @@ function App() {
 
     try {
       //const response = await fetch("http://localhost:5000/ask", {  // Old local dev Server details
-      const response = await fetch("healthcare-chatbot1-cqb0gjb3fugzgcfc.centralindia-01.azurewebsites.net/ask", {
+      const response = await fetch("https://healthcare-chatbot1-cqb0gjb3fugzgcfc.centralindia-01.azurewebsites.net/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),
